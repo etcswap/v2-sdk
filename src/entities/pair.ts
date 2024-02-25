@@ -24,17 +24,19 @@ import { InsufficientInputAmountError, InsufficientReservesError } from '../erro
 export const computePairAddress = ({
   factoryAddress,
   tokenA,
-  tokenB
+  tokenB,
+  initCodeHashManualOverride 
 }: {
   factoryAddress: string
   tokenA: Token
   tokenB: Token
+  initCodeHashManualOverride?: string
 }): string => {
   const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA] // does safety checks
   return getCreate2Address(
     factoryAddress,
     keccak256(['bytes'], [pack(['address', 'address'], [token0.address, token1.address])]),
-    INIT_CODE_HASH
+    initCodeHashManualOverride ?? INIT_CODE_HASH
   )
 }
 export class Pair {

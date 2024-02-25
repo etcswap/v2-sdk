@@ -16,6 +16,19 @@ describe('computePairAddress', () => {
 
     expect(result).toEqual('0xb50b5182D6a47EC53a469395AF44e371d7C76ed4')
   })
+  it('should correctly compute the pool address if initCodeHashManualOverride', () => {
+    const initCodeHashManualOverride = "0xa036bc35f72d4331ca192979fb12e8a1f3260672aca44271ce35744fa5d66749"
+    const tokenA = new Token(1, '0x6b0bc2e986b0e70db48296619a96e9ac02c5574b', 18, 'tknA', 'TokenA')
+    const tokenB = new Token(1, '0xcb0cbce06860f6c30c62560f5efbf918150e056e', 18, 'tknB', 'TokenB')
+    const result = computePairAddress({
+      factoryAddress: '0x09fafa5eecbc11C3e5d30369e51B7D9aab2f3F53',
+      tokenA,
+      tokenB,
+      initCodeHashManualOverride
+    })
+
+    expect(result).toEqual('0x0b389b09068B60c5353A12997C6F5754734B9144')
+  })
   it('should give same result regardless of token order', () => {
     const USDC = new Token(1, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 18, 'USDC', 'USD Coin')
     const DAI = new Token(1, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'DAI Stablecoin')
