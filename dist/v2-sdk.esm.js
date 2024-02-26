@@ -236,21 +236,22 @@ var computePairAddress = function computePairAddress(_ref) {
   return getCreate2Address(factoryAddress, keccak256(['bytes'], [pack(['address', 'address'], [token0.address, token1.address])]), initCodeHashManualOverride != null ? initCodeHashManualOverride : INIT_CODE_HASH);
 };
 var Pair = /*#__PURE__*/function () {
-  function Pair(currencyAmountA, tokenAmountB) {
+  function Pair(currencyAmountA, tokenAmountB, initCodeHashManualOverride) {
     var tokenAmounts = currencyAmountA.currency.sortsBefore(tokenAmountB.currency) // does safety checks
     ? [currencyAmountA, tokenAmountB] : [tokenAmountB, currencyAmountA];
-    this.liquidityToken = new Token(tokenAmounts[0].currency.chainId, Pair.getAddress(tokenAmounts[0].currency, tokenAmounts[1].currency), 18, 'UNI-V2', 'Uniswap V2');
+    this.liquidityToken = new Token(tokenAmounts[0].currency.chainId, Pair.getAddress(tokenAmounts[0].currency, tokenAmounts[1].currency, initCodeHashManualOverride), 18, 'UNI-V2', 'Uniswap V2');
     this.tokenAmounts = tokenAmounts;
   }
 
-  Pair.getAddress = function getAddress(tokenA, tokenB) {
+  Pair.getAddress = function getAddress(tokenA, tokenB, initCodeHashManualOverride) {
     var _FACTORY_ADDRESS_MAP$;
 
     var factoryAddress = (_FACTORY_ADDRESS_MAP$ = FACTORY_ADDRESS_MAP[tokenA.chainId]) != null ? _FACTORY_ADDRESS_MAP$ : FACTORY_ADDRESS;
     return computePairAddress({
       factoryAddress: factoryAddress,
       tokenA: tokenA,
-      tokenB: tokenB
+      tokenB: tokenB,
+      initCodeHashManualOverride: initCodeHashManualOverride
     });
   }
   /**
