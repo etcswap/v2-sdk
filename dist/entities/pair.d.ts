@@ -8,8 +8,8 @@ export declare const computePairAddress: ({ factoryAddress, tokenA, tokenB, init
 export declare class Pair {
     readonly liquidityToken: Token;
     private readonly tokenAmounts;
-    static getAddress(tokenA: Token, tokenB: Token, initCodeHashManualOverride?: string): string;
-    constructor(currencyAmountA: CurrencyAmount<Token>, tokenAmountB: CurrencyAmount<Token>, initCodeHashManualOverride?: string);
+    static getAddress(tokenA: Token, tokenB: Token, factoryAddressOverride?: string, initCodeHashManualOverride?: string): string;
+    constructor(currencyAmountA: CurrencyAmount<Token>, tokenAmountB: CurrencyAmount<Token>, factoryAddressOverride?: string, initCodeHashManualOverride?: string);
     /**
      * Returns true if the token is either token0 or token1
      * @param token to check

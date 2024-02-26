@@ -242,17 +242,17 @@ var computePairAddress = function computePairAddress(_ref) {
   return address.getCreate2Address(factoryAddress, solidity.keccak256(['bytes'], [solidity.pack(['address', 'address'], [token0.address, token1.address])]), initCodeHashManualOverride != null ? initCodeHashManualOverride : INIT_CODE_HASH);
 };
 var Pair = /*#__PURE__*/function () {
-  function Pair(currencyAmountA, tokenAmountB, initCodeHashManualOverride) {
+  function Pair(currencyAmountA, tokenAmountB, factoryAddressOverride, initCodeHashManualOverride) {
     var tokenAmounts = currencyAmountA.currency.sortsBefore(tokenAmountB.currency) // does safety checks
     ? [currencyAmountA, tokenAmountB] : [tokenAmountB, currencyAmountA];
-    this.liquidityToken = new sdkCore.Token(tokenAmounts[0].currency.chainId, Pair.getAddress(tokenAmounts[0].currency, tokenAmounts[1].currency, initCodeHashManualOverride), 18, 'UNI-V2', 'Uniswap V2');
+    this.liquidityToken = new sdkCore.Token(tokenAmounts[0].currency.chainId, Pair.getAddress(tokenAmounts[0].currency, tokenAmounts[1].currency, factoryAddressOverride, initCodeHashManualOverride), 18, 'UNI-V2', 'Uniswap V2');
     this.tokenAmounts = tokenAmounts;
   }
 
-  Pair.getAddress = function getAddress(tokenA, tokenB, initCodeHashManualOverride) {
+  Pair.getAddress = function getAddress(tokenA, tokenB, factoryAddressOverride, initCodeHashManualOverride) {
     var _FACTORY_ADDRESS_MAP$;
 
-    var factoryAddress = (_FACTORY_ADDRESS_MAP$ = FACTORY_ADDRESS_MAP[tokenA.chainId]) != null ? _FACTORY_ADDRESS_MAP$ : FACTORY_ADDRESS;
+    var factoryAddress = factoryAddressOverride || ((_FACTORY_ADDRESS_MAP$ = FACTORY_ADDRESS_MAP[tokenA.chainId]) != null ? _FACTORY_ADDRESS_MAP$ : FACTORY_ADDRESS);
     return computePairAddress({
       factoryAddress: factoryAddress,
       tokenA: tokenA,
