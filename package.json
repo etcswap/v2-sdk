@@ -21,10 +21,13 @@
     "test": "tsdx test",
     "prepublishOnly": "tsdx build"
   },
+  "resolutions": {
+    "@uniswap/sdk-core": "git+https://github.com/etcswap/sdk-core.git#etcswap"
+  },
   "dependencies": {
     "@ethersproject/address": "^5.0.0",
     "@ethersproject/solidity": "^5.0.0",
-    "@uniswap/sdk-core": "^4.1.3",
+    "@uniswap/sdk-core": "git+https://github.com/etcswap/sdk-core.git#etcswap",
     "tiny-invariant": "^1.1.0",
     "tiny-warning": "^1.0.3"
   },
