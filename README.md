@@ -1,7 +1,24 @@
-# @uniswap/v2-sdk - Now at `Uniswap/sdks`
+# ETCswap V2 SDK (Archived)
 
-All versions after 4.3.0 of this SDK can be found in the [SDK monorepo](https://github.com/Uniswap/sdks/tree/main/sdks/v2-sdk)! Please file all future issues, PR’s, and discussions there.
+> **This repo is archived.** The SDK has been migrated to the [sdks monorepo](https://github.com/etcswap/sdks).
 
-### Old Issues and PR’s
+Legacy standalone V2 SDK for ETCswap. The `etcswap` branch contains ETC-specific customizations (factory address override, init code hash override).
 
-If you have an issue or open PR that is still active on this SDK in this repository, please recreate it in the new repository. Some existing issues and PR’s may be automatically migrated by the Uniswap Labs team.
+## Replacement Packages
+
+| Package | Scope | Description |
+|---------|-------|-------------|
+| `@etcswapv2/v2-sdk-legacy` | [npm](https://www.npmjs.com/settings/etcswapv2/packages) | V2 SDK with viem support (used by v2-interface) |
+| `@etcswapv2/v2-sdk` | [npm](https://www.npmjs.com/settings/etcswapv2/packages) | V2 SDK (monorepo version) |
+| `@etcswapv2/sdk-core` | [npm](https://www.npmjs.com/settings/etcswapv2/packages) | Shared core utilities |
+
+## ETC Customizations (etcswap branch)
+
+- `src/entities/pair.ts` — `initCodeHashManualOverride` for ETC INIT_CODE_HASH
+- `src/entities/pair.ts` — `factoryAddressOverride` for ETC Factory address
+- `dist/` — Pre-built artifacts for direct consumption
+
+## Related Repos
+
+- [sdks](https://github.com/etcswap/sdks) — Active SDK monorepo (replacement)
+- [v2-interface](https://github.com/etcswap/v2-interface) — Trading frontend (uses @etcswapv2/v2-sdk-legacy)
